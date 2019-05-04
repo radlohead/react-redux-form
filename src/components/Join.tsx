@@ -1,13 +1,29 @@
-import * as React from "react";
-import { Field, reduxForm } from 'redux-form';
+import * as React from 'react'
+import { connect } from 'react-redux'
+import { Field, reduxForm } from 'redux-form'
 
-const Join = (props: any) => {
-    const { handleSubmit } = props;
+let Join: any = (props: any) => {
+    const { handleSubmit } = props
     return (
         <form onSubmit={handleSubmit} action="">
             <div>
-                <label>name</label>
                 <div>
+                    <label>radio</label>
+                    <Field
+                        name="sex"
+                        component="input"
+                        type="radio"
+                        value="male"
+                    />
+                    <Field
+                        name="sex"
+                        component="input"
+                        type="radio"
+                        value="female"
+                    />
+                </div>
+                <div>
+                    <label>name</label>
                     <Field
                         name="name"
                         component="input"
@@ -45,6 +61,14 @@ const Join = (props: any) => {
     )
 }
 
-export default reduxForm({
+Join = reduxForm({
     form: 'join'
-})(Join);
+})(Join)
+
+Join = connect(state => ({
+    initialValues: {
+        sex: 'male'
+    }
+}))(Join)
+
+export default Join
